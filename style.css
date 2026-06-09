@@ -1841,6 +1841,50 @@ a {
 }
 
 /* ==========================================================================
+   Custom Logo & Scroll Animation Styles
+   ========================================================================== */
+.logo-img {
+  height: 32px;
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.1s linear, filter var(--transition-smooth);
+  filter: drop-shadow(0 2px 6px var(--primary-glow));
+  transform: rotate(calc(var(--scroll-percent, 0) * 360deg));
+}
+
+/* Add extra glow on hover */
+.logo:hover .logo-img {
+  filter: drop-shadow(0 4px 12px var(--primary));
+  transform: rotate(calc(var(--scroll-percent, 0) * 360deg + 15deg)) scale(1.05);
+}
+
+.loader-logo {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.loader-logo-img {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 16px var(--primary-glow));
+  animation: logoPulse 2.5s infinite ease-in-out;
+}
+
+@keyframes logoPulse {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    filter: drop-shadow(0 4px 12px var(--primary-glow));
+  }
+  50% {
+    transform: scale(1.1) rotate(180deg);
+    filter: drop-shadow(0 6px 20px var(--primary));
+  }
+}
+
+/* ==========================================================================
    Media Queries & Mobile Responsiveness
    ========================================================================== */
 @media (max-width: 1024px) {

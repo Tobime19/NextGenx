@@ -131,9 +131,28 @@ function tick() {
   if (Math.abs(diff) > 0.005) {
     smoothScroll.currentFrameIndex += diff * smoothScroll.ease;
     drawFrame(smoothScroll.currentFrameIndex);
+    
+    // Smoothly update the logo rotation based on the lerped frame index
+    const easedPercent = (smoothScroll.currentFrameIndex - 1) / (TOTAL_FRAMES - 1);
+    document.documentElement.style.setProperty('--scroll-percent', easedPercent);
   }
 
   requestAnimationFrame(tick);
+}
+
+function initScrollLogo() {
+  const updateGlobalScroll = () => {
+    // If there is no canvas, we update the scroll percent variable directly on scroll
+    if (!canvas) {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const percent = docHeight > 0 ? Math.max(0, Math.min(1, scrollTop / docHeight)) : 0;
+      document.documentElement.style.setProperty('--scroll-percent', percent);
+    }
+  };
+
+  window.addEventListener('scroll', updateGlobalScroll);
+  updateGlobalScroll(); // Run once initially
 }
 
 // ==========================================================================
@@ -359,6 +378,9 @@ function initProductFilter() {
 async function init() {
   // Setup General Header & Navbar Features
   initHeaderAndNav();
+  
+  // Initialize scroll-based logo animation
+  initScrollLogo();
   
   // Setup Page-Specific Logic
   initContactForm();
