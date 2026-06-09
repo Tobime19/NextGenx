@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NextGen Engineering Works | Precision Manufacturing & Industrial Machinery</title>
+  <meta name="description" content="NextGen Engineering Works is a leading manufacturer of high-precision plastic moulds, interlocking concrete paver moulds, vibrator tables, concrete mixers, and bespoke industrial machinery serving India and Nepal since 2003.">
+  
+  <!-- Modern Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Styling -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Preloading Progress Screen -->
+  <div id="loader" class="loader-overlay">
+    <div class="loader-card">
+      <div class="loader-logo">NextGen</div>
+      <div class="loader-bar-container">
+        <div id="loader-bar" class="loader-bar"></div>
+      </div>
+      <p id="loader-text" class="loader-text">Initializing premium experience...</p>
+    </div>
+  </div>
+
+  <!-- Header / Navigation -->
+  <header class="header">
+    <nav class="nav-container">
+      <a href="index.html" class="logo">NextGen<span>.</span></a>
+      <button class="mobile-nav-toggle" aria-label="Toggle Navigation">☰</button>
+      <div class="nav-menu">
+        <ul class="nav-links">
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <button class="nav-cta" id="cta-btn">Get Quote</button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Homepage Scroll Animation Hero -->
+  <main class="scroll-track">
+    <!-- The fixed background container holding the canvas -->
+    <div class="canvas-container">
+      <canvas id="animation-canvas"></canvas>
+      <div class="canvas-overlay"></div>
+    </div>
+    
+    <!-- Hero Text Overlay (Stays centered during scroll animation) -->
+    <div class="hero-intro-text">
+      <span class="badge-pill">Established 2003</span>
+      <h1 class="hero-title">Engineering Precision Since 2003</h1>
+      <p class="hero-description">Trusted manufacturer of Plastic Moulds, CNC Solutions, and Industrial Machinery serving global standards from New Delhi.</p>
+      <div class="hero-actions">
+        <a href="#capabilities" class="btn-primary">View Solutions 
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+        <a href="products.html" class="btn-secondary">Download Catalog</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Homepage Content Wrapper -->
+  <div class="home-content">
+    
+    <!-- Stats Highlight Bar -->
+    <section class="stats-bar">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-item" id="gst-verified">
+            <div class="stat-val" style="font-size: 1.5rem; color: var(--tertiary); margin-bottom: 0.50rem;">
+              <span style="display: inline-flex; align-items: center; gap: 6px; background: var(--tertiary-glow); padding: 4px 12px; border-radius: var(--radius-full); font-size: 0.8rem; font-weight: 700;">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                GST VERIFIED
+              </span>
+            </div>
+            <div class="stat-lbl" style="font-family: var(--font-mono); font-size: 0.8rem;">ID: 07AABCN1234F1Z1</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-val">20+ Years</div>
+            <div class="stat-lbl">Legacy of Excellence</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-val">100k+ Orders</div>
+            <div class="stat-lbl">Delivered Nationwide</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-val">India & Nepal</div>
+            <div class="stat-lbl">Deep Supply Network</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Legacy / About Section -->
+    <section id="legacy" class="section-padding">
+      <div class="container">
+        <div class="legacy-split">
+          <div>
+            <span class="section-subtitle">Our Legacy</span>
+            <h2 class="section-title">Pioneering Industrial Manufacturing in Mayapuri</h2>
+            <p class="section-desc">For over two decades, NextGen Engineering Works has been at the forefront of precision engineering. What started as a small workshop has evolved into a powerhouse of industrial innovation, specialized in high-tolerance plastic moulds and heavy-duty concrete machinery. Our commitment to quality is backed by rigorous testing and a relentless pursuit of technological advancement.</p>
+            <div class="legacy-stats">
+              <div class="legacy-stat-card">
+                <div class="legacy-stat-num">2.4k</div>
+                <div class="legacy-stat-lbl">Active Clients</div>
+              </div>
+              <div class="legacy-stat-card">
+                <div class="legacy-stat-num">15+</div>
+                <div class="legacy-stat-lbl">Patent Filings</div>
+              </div>
+              <div class="legacy-stat-card">
+                <div class="legacy-stat-num">98%</div>
+                <div class="legacy-stat-lbl">Precision Rate</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="legacy-image-container">
+              <img src="assets/precision_machining.png" alt="Precision Machining" class="legacy-img">
+              <div class="certified-badge">
+                <div class="certified-badge-title">ISO 9001</div>
+                <div class="certified-badge-lbl">Certified Quality</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Core Capabilities / Solutions Section -->
+    <section id="capabilities" class="section-padding" style="background: var(--surface-dim); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+      <div class="container">
+        <div class="capabilities-header">
+          <div>
+            <span class="section-subtitle">Core Capabilities</span>
+            <h2 class="section-title">Specialized Industrial Solutions</h2>
+          </div>
+          <a href="products.html" class="link-arrow">Explore Full Inventory 
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+        </div>
+        <div class="capabilities-grid">
+          <!-- Card 1 -->
+          <div class="cap-card">
+            <div class="cap-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line><line x1="15" y1="3" x2="15" y2="21"></line><line x1="3" y1="9" x2="21" y2="9"></line><line x1="3" y1="15" x2="21" y2="15"></line></svg>
+            </div>
+            <h3 class="cap-title">Plastic Moulds</h3>
+            <p class="cap-desc">High-precision injection and blow moulds designed for durability and mass production efficiency.</p>
+            <ul class="cap-checklist">
+              <li>Automotive Grade Steel</li>
+              <li>Multi-cavity Designs</li>
+            </ul>
+          </div>
+          <!-- Card 2 -->
+          <div class="cap-card">
+            <div class="cap-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+            </div>
+            <h3 class="cap-title">CNC Solutions</h3>
+            <p class="cap-desc">Custom CNC component manufacturing with micron-level precision and rapid prototyping.</p>
+            <ul class="cap-checklist">
+              <li>5-Axis Milling</li>
+              <li>Complex Geometry</li>
+            </ul>
+          </div>
+          <!-- Card 3 -->
+          <div class="cap-card">
+            <div class="cap-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="15" x2="20" y2="15"></line><line x1="4" y1="9" x2="20" y2="9"></line><line x1="9" y1="6" x2="9" y2="18"></line><line x1="15" y1="6" x2="15" y2="18"></line></svg>
+            </div>
+            <h3 class="cap-title">Vibrator Tables</h3>
+            <p class="cap-desc">Heavy-duty vibrator tables for paver block manufacturing and concrete consolidation.</p>
+            <ul class="cap-checklist">
+              <li>Variable Frequency</li>
+              <li>High Load Capacity</li>
+            </ul>
+          </div>
+          <!-- Card 4 -->
+          <div class="cap-card">
+            <div class="cap-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+            </div>
+            <h3 class="cap-title">Color Mixers</h3>
+            <p class="cap-desc">Uniform pigment blending machines for industrial-grade concrete and plastic coloring.</p>
+            <ul class="cap-checklist">
+              <li>Homogeneous Mixing</li>
+              <li>Low Maintenance</li>
+            </ul>
+          </div>
+          <!-- Card 5 (Double Width) -->
+          <div class="cap-card concrete-card">
+            <div class="concrete-card-content">
+              <span class="badge-pill">Heavy Machinery</span>
+              <h3 class="cap-title">Concrete Mixing Systems</h3>
+              <p class="cap-desc">Engineering massive solutions for construction infrastructure, featuring high-torque engines and reinforced drums.</p>
+              <a href="contact.html?product=Concrete%20Mixer" class="btn-primary" style="align-self: flex-start; padding: 0.75rem 1.5rem; font-size: 0.85rem;">Technical Data Sheet</a>
+            </div>
+            <div class="concrete-card-img-box">
+              <img src="assets/concrete_mixer.png" alt="Concrete Mixing System">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The NextGen Advantage Section -->
+    <section id="advantage" class="section-padding">
+      <div class="container">
+        <span class="section-subtitle">The NextGen Advantage</span>
+        <h2 class="section-title" style="margin-bottom: 4rem;">Engineered for Reliability</h2>
+        <div class="advantage-grid">
+          <div class="adv-card">
+            <div class="adv-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+            </div>
+            <h3 class="adv-title">R&D Focused</h3>
+            <p class="adv-desc">Continuous investment in CAD/CAM technology and materials science to stay ahead of industry curves.</p>
+          </div>
+          <div class="adv-card">
+            <div class="adv-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            </div>
+            <h3 class="adv-title">24/7 Technical Support</h3>
+            <p class="adv-desc">Our engineers are available for on-site commissioning and emergency breakdown assistance across India.</p>
+          </div>
+          <div class="adv-card">
+            <div class="adv-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+            </div>
+            <h3 class="adv-title">Supply Value</h3>
+            <p class="adv-desc">Competitive pricing models for large-scale procurement without compromising on tolerance standards.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Banner Section -->
+    <section class="container" style="margin-bottom: 7.5rem;">
+      <div class="cta-banner">
+        <span class="section-subtitle">Ready to Optimize Your Production?</span>
+        <h2 class="section-title">Consult with our engineering experts today for custom machinery designs and volume manufacturing quotes.</h2>
+        <div class="hero-actions">
+          <a href="contact.html" class="btn-primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            Send Inquiry
+          </a>
+          <a href="https://wa.me/919990533511?text=Hello%20NextGen%20Engineering%20Works%2C%20I%20would%20like%20to%20inquire%20about%20your%20manufacturing%20services." target="_blank" class="btn-primary" style="background-color: var(--tertiary); border-color: var(--tertiary); box-shadow: 0 4px 12px var(--tertiary-glow);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+            WhatsApp Expert
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <!-- Col 1 -->
+          <div class="footer-brand">
+            <a href="index.html" class="logo">NextGen<span>.</span></a>
+            <p class="footer-desc">Specialized in precision manufacturing of industrial moulds and heavy machinery since 2003.</p>
+            <div class="footer-socials">
+              <a href="https://maps.app.goo.gl/1vZbDbbDKngy6UAHA" target="_blank" class="social-btn" aria-label="Location Map">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+              </a>
+              <a href="contact.html" class="social-btn" aria-label="Share contact">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+              </a>
+            </div>
+          </div>
+          <!-- Col 2 -->
+          <div>
+            <h4 class="footer-col-title">Quick Links</h4>
+            <ul class="footer-links">
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="services.html#network">Supply Network</a></li>
+              <li><a href="#gst-verified">GST Verified</a></li>
+              <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+          </div>
+          <!-- Col 3 -->
+          <div>
+            <h4 class="footer-col-title">Solutions</h4>
+            <ul class="footer-links">
+              <li><a href="products.html?category=moulds">Plastic Moulding</a></li>
+              <li><a href="products.html?category=custom">CNC Components</a></li>
+              <li><a href="products.html?category=machinery">Mixing Systems</a></li>
+              <li><a href="services.html">Consulting</a></li>
+            </ul>
+          </div>
+          <!-- Col 4 -->
+          <div>
+            <h4 class="footer-col-title">Locations</h4>
+            <ul class="contact-info-list">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                C-174E backside, Mayapuri Industrial Area, Phase II, New Delhi, India 110064
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                <a href="tel:+919990533511">+91 9990533511</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="footer-bottom">
+          <p class="copyright">© 2024 NextGen Engineering Works. 20+ Years of Manufacturing Excellence in Mayapuri, New Delhi.</p>
+          <div class="footer-legal-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Floating WhatsApp Widget -->
+  <a href="https://wa.me/919990533511?text=Hello%20NextGen%20Engineering%20Works%2C%20I%20would%20like%20to%20inquire%20about%20your%20manufacturing%20services." target="_blank" class="floating-whatsapp" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+  </a>
+
+  <!-- Core Scripts -->
+  <script src="app.js"></script>
+</body>
+</html>

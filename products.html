@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Catalog | NextGen Engineering Works</title>
+  <meta name="description" content="Explore the full product inventory of NextGen Engineering Works, including premium plastic moulds, vibrator tables, color mixers, and concrete mixers.">
+  
+  <!-- Modern Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Styling -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Preloading Progress Screen -->
+  <div id="loader" class="loader-overlay">
+    <div class="loader-card">
+      <div class="loader-logo">NextGen</div>
+      <div class="loader-bar-container">
+        <div id="loader-bar" class="loader-bar"></div>
+      </div>
+      <p id="loader-text" class="loader-text">Loading catalog items...</p>
+    </div>
+  </div>
+
+  <!-- Header / Navigation -->
+  <header class="header">
+    <nav class="nav-container">
+      <a href="index.html" class="logo">NextGen<span>.</span></a>
+      <button class="mobile-nav-toggle" aria-label="Toggle Navigation">☰</button>
+      <div class="nav-menu">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="products.html" class="active">Products</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <button class="nav-cta" id="cta-btn">Get Quote</button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <span class="badge-pill">Product Catalog</span>
+      <h1 class="section-title" style="font-size: 3rem; max-width: 900px; line-height: 1.1;">Precision Industrial Catalogue</h1>
+      <p class="section-desc" style="max-width: 750px; margin-bottom: 2rem;">Browse our extensive range of high-tolerance plastic moulds, heavy consolidating vibrator tables, and industrial mixers engineered for durability.</p>
+      <div style="display: flex; gap: 12px;">
+        <a href="https://wa.me/919990533511?text=Hello%20NextGen%20Engineering%20Works%2C%20I%20would%20like%20to%20request%20your%20product%20catalog%20PDF." target="_blank" class="btn-primary" style="padding: 10px 20px; font-size: 0.9rem;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          Download Portfolio PDF
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Filter and Search Bar -->
+  <section class="container" style="margin-bottom: 6rem;">
+    <div class="catalog-filter-bar">
+      <div class="filter-tabs">
+        <button class="filter-tab active" data-filter="all">All Products</button>
+        <button class="filter-tab" data-filter="moulds">Plastic Moulds</button>
+        <button class="filter-tab" data-filter="machinery">Machinery</button>
+        <button class="filter-tab" data-filter="custom">Custom Products</button>
+      </div>
+      <div class="search-box">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" id="search-catalog" class="search-input" placeholder="Search catalog...">
+      </div>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="products-grid">
+      <!-- Dumble Mold -->
+      <div class="product-card" data-category="moulds">
+        <div class="product-img-box">
+          <span class="product-tag hot">Top Seller</span>
+          <img src="assets/dumble_mold.png" alt="Dumble Interlocking Paver Mold">
+        </div>
+        <div class="product-content">
+          <h3 class="product-title">Dumble Mold</h3>
+          <p class="product-desc">High-density interlocking paver block mould designed for heavy load pavements and aesthetic finishes.</p>
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-top: auto;">
+            <a href="https://wa.me/919990533511?text=Hello%20NextGen%20Engineering%20Works%2C%20I%20would%20like%20to%20request%20technical%20specifications%20for%20the%20Dumble%20Mold." target="_blank" class="product-btn" style="background: var(--primary); border-color: var(--primary); color: #ffffff;">Request Tech Specs</a>
+            <a href="contact.html?product=Dumble%20Mold" class="product-btn">Inquire</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Zebra Mold -->
+      <div class="product-card" data-category="moulds">
+        <div class="product-img-box">
+          <img src="assets/dumble_mold.png" alt="Zebra Interlocking Paver Mold">
+        </div>
+        <div class="product-content">
+          <h3 class="product-title">Zebra Mold</h3>
+          <p class="product-desc">Robust line-patterned interlocking paver mould with exceptional wear resistance for commercial pathways.</p>
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-top: auto;">
+            <a href="https://wa.me/919990533511?text=Hello%20NextGen%20Engineering%20Works%2C%20I%20would%20like%20to%20request%20technical%20specifications%20for%20the%20Zebra%20Mold." target="_blank" class="product-btn" style="background: var(--primary); border-color: var(--primary); color: #ffffff;">Request Tech Specs</a>
+            <a href="contact.html?product=Zebra%20Mold" class="product-btn">Inquire</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vibrator Tables -->
+      <div class="product-card" data-category="machinery">
+        <div class="product-img-box">
+          <span class="product-tag">Heavy Duty</span>
+          <img src="assets/vibrator_table.png" alt="Heavy Duty Vibrator Table">
+        </div>
+        <div class="product-content">
+          <h3 class="product-title">Vibrator Tables</h3>
+          <p class="product-desc">High-amplitude consolidation tables equipped with dual electric motors for perfect concrete compaction.</p>
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-top: auto;">
+            <a href="https://wa.me/919990533511?text=Hello%20NextGen%20Engineering%20Works%2C%20I%20would%20like%20to%20request%20technical%20specifications%20for%20the%20Vibrator%20Tables." target="_blank" class="product-btn" style="background: var(--primary); border-color: var(--primary); color: #ffffff;">Request Tech Specs</a>
+            <a href="contact.html?product=Vibrator%20Table" class="product-btn">Inquire</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Designer Tile -->
+      <div class="product-card" data-category="moulds">
+        <div class="product-img-box">
+          <img src="assets/dumble_mold.png" alt="Designer Tile Mold">
+        </div>
+        <div class="product-content">
+          <h3 class="product-title">Designer Tile</h3>
+          <p class="product-desc">Architectural pathway and exterior wall cladding tile moulds with intricate surface textures.</p>
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-top: auto;">
+            <a href="https://wa.me/919990533511?text=Hello%20NextGen%20Engineering%20Works%2C%20I%20would%20like%20to%20request%20technical%20specifications%20for%20the%20Designer%20Tile%20Mold." target="_blank" class="product-btn" style="background: var(--primary); border-color: var(--primary); color: #ffffff;">Request Tech Specs</a>
+            <a href="contact.html?product=Designer%20Tile" class="product-btn">Inquire</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Color Mixers -->
+      <div class="product-card" data-category="machinery">
+        <div class="product-img-box">
+          <img src="assets/concrete_mixer.png" alt="Industrial Color Mixer">
+        </div>
+        <div class="product-content">
+          <h3 class="product-title">Color Mixers</h3>
+          <p class="product-desc">Homogeneous pigment blenders with high-torque gearboxes and wear-resistant mixing blades.</p>
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-top: auto;">
+            <a href="https://wa.me/919990533511?text=Hello%20NextGen%20Engineering%20Works%2C%20I%20would%20like%20to%20request%20technical%20specifications%20for%20the%20Color%20Mixers." target="_blank" class="product-btn" style="background: var(--primary); border-color: var(--primary); color: #ffffff;">Request Tech Specs</a>
+            <a href="contact.html?product=Color%20Mixer" class="product-btn">Inquire</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Drain Cover -->
+      <div class="product-card" data-category="moulds">
+        <div class="product-img-box">
+          <img src="assets/dumble_mold.png" alt="Drain Cover Mold">
+        </div>
+        <div class="product-content">
+          <h3 class="product-title">Drain Cover</h3>
+          <p class="product-desc">Heavy load-bearing storm drainage cover moulds engineered for municipal infrastructure.</p>
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-top: auto;">
+            <a href="https://wa.me/919990533511?text=Hello%20NextGen%20Engineering%20Works%2C%20I%20would%20like%20to%20request%20technical%20specifications%20for%20the%20Drain%20Cover%20Mold." target="_blank" class="product-btn" style="background: var(--primary); border-color: var(--primary); color: #ffffff;">Request Tech Specs</a>
+            <a href="contact.html?product=Drain%20Cover" class="product-btn">Inquire</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Concrete Mixers -->
+      <div class="product-card" data-category="machinery">
+        <div class="product-img-box">
+          <span class="product-tag">New Model</span>
+          <img src="assets/concrete_mixer.png" alt="Concrete Mixer Machine">
+        </div>
+        <div class="product-content">
+          <h3 class="product-title">Concrete Mixers</h3>
+          <p class="product-desc">Mobile concrete mixing systems with pneumatic tire setup, optimized drum geometry, and diesel engine drives.</p>
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-top: auto;">
+            <a href="https://wa.me/919990533511?text=Hello%20NextGen%20Engineering%20Works%2C%20I%20would%20like%20to%20request%20technical%20specifications%20for%20the%20Concrete%20Mixers." target="_blank" class="product-btn" style="background: var(--primary); border-color: var(--primary); color: #ffffff;">Request Tech Specs</a>
+            <a href="contact.html?product=Concrete%20Mixer" class="product-btn">Inquire</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bespoke Design Card -->
+      <div class="product-card custom-cta-card" data-category="custom">
+        <div class="cap-icon-box" style="width: 48px; height: 48px; border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 24px; height: 24px;"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+        </div>
+        <h3 class="product-title">Bespoke Design</h3>
+        <p class="product-desc">Need a custom mould pattern or specialized machinery? Connect with our R&D team directly on WhatsApp.</p>
+        <a href="https://wa.me/919990533511?text=Hello%20NextGen%20Engineering%20Works%2C%20I%20would%20like%20to%20consult%20about%20a%20custom%20mould%20or%20machinery%20design." target="_blank" class="product-btn" style="background: var(--primary); border-color: var(--primary); color: #ffffff; width: 100%; margin-top: auto;">Contact R&D Support</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certifications Bar -->
+  <section class="certifications-bar">
+    <div class="container">
+      <div class="certs-flex">
+        <div class="cert-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          GST Verified Status
+        </div>
+        <div class="cert-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          ISO 9001 Compliant
+        </div>
+        <div class="cert-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+          Nepal Cross-Border Supply
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">NextGen<span>.</span></a>
+          <p class="footer-desc">Specialized in precision manufacturing of industrial moulds and heavy machinery since 2003.</p>
+          <div class="footer-socials">
+            <a href="https://maps.app.goo.gl/1vZbDbbDKngy6UAHA" target="_blank" class="social-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></a>
+            <a href="contact.html" class="social-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg></a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html#network">Supply Network</a></li>
+            <li><a href="index.html#gst-verified">GST Verified</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Solutions</h4>
+          <ul class="footer-links">
+            <li><a href="products.html?category=moulds">Plastic Moulding</a></li>
+            <li><a href="products.html?category=custom">CNC Components</a></li>
+            <li><a href="products.html?category=machinery">Mixing Systems</a></li>
+            <li><a href="services.html">Consulting</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Contact</h4>
+          <ul class="contact-info-list">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              C-174E backside, Mayapuri Industrial Area, Phase II, New Delhi, India 110064
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+              <a href="mailto:nextgeneration2m@gmail.com">nextgeneration2m@gmail.com</a>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              <a href="tel:+919990533511">+91 9990533511</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="copyright">© 2024 NextGen Engineering Works. 20+ Years of Manufacturing Excellence in Mayapuri, New Delhi.</p>
+        <div class="footer-legal-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp Widget -->
+  <a href="https://wa.me/919990533511?text=Hello%20NextGen%20Engineering%20Works%2C%20I%20would%20like%20to%20inquire%20about%20your%20manufacturing%20services." target="_blank" class="floating-whatsapp" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+  </a>
+
+  <!-- Core Scripts -->
+  <script src="app.js"></script>
+</body>
+</html>
