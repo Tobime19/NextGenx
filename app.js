@@ -209,12 +209,11 @@ function initHeaderAndNav() {
     }
   });
 
-  // Active sidebar link highlight for Legacy Page
+  // Active sidebar link highlight and scroll behavior
   const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
   if (sidebarLinks.length > 0) {
     sidebarLinks.forEach(link => {
       const href = link.getAttribute('href');
-      // If href starts with hash, handle scrollspy
       if (href.startsWith('#')) {
         link.addEventListener('click', (e) => {
           e.preventDefault();
@@ -231,6 +230,38 @@ function initHeaderAndNav() {
         link.classList.remove('active');
       }
     });
+
+    // Intersection Observer for scrollspy
+    if ('IntersectionObserver' in window) {
+      const observerOptions = {
+        root: null,
+        rootMargin: '-10% 0px -70% 0px',
+        threshold: 0
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('id');
+            sidebarLinks.forEach(link => {
+              if (link.getAttribute('href') === `#${id}`) {
+                link.classList.add('active');
+              } else if (link.getAttribute('href').startsWith('#')) {
+                link.classList.remove('active');
+              }
+            });
+          }
+        });
+      }, observerOptions);
+
+      sidebarLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href.startsWith('#')) {
+          const targetSection = document.querySelector(href);
+          if (targetSection) observer.observe(targetSection);
+        }
+      });
+    }
   }
 
   // Navigation button redirection: Get Quote button links to WhatsApp chat
