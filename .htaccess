@@ -1,0 +1,11 @@
+# Rewrite Engine Enable
+RewriteEngine On
+
+# Redirect external .html requests to clean URLs
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /([^\ ]+)\.html\  [NC]
+RewriteRule ^ %1 [L,R=301]
+
+# Internally resolve clean URLs to .html files
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.*)$ $1.html [L]
