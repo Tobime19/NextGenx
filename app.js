@@ -2,6 +2,12 @@
 // NextGen Engineering Works - Core Javascript Engine
 // ==========================================================================
 
+// Supabase Configuration
+const SUPABASE_URL = 'https://qohxciwlwbspjgaiiszc.supabase.co';
+// Replace this placeholder with your actual Supabase Anon Key (Public API Key)
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFvaHhjaXdsd2JzcGpnYWlpc3pjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI5OTU1MDIsImV4cCI6MjA5ODU3MTUwMn0._IhTIiAAe7-wAhrnnLReYaPBrjxOViWamufKoJqw2dU';
+let supabase = null;
+
 // Configuration
 const TOTAL_FRAMES = 181;
 const BASE_URL = './assets/frames/ezgif-frame-';
@@ -40,7 +46,7 @@ function preloadImages() {
     const onImageLoad = () => {
       loadedCount++;
       const percent = Math.floor((loadedCount / TOTAL_FRAMES) * 100);
-      
+
       if (loaderBar) loaderBar.style.width = `${percent}%`;
       if (loaderText) loaderText.textContent = `Preloading frames: ${percent}% (${loadedCount}/${TOTAL_FRAMES})`;
 
@@ -69,10 +75,10 @@ function preloadImages() {
 // ==========================================================================
 function drawFrame(frameIndex) {
   if (!canvas || !ctx) return;
-  
+
   const roundedIndex = Math.max(1, Math.min(TOTAL_FRAMES, Math.round(frameIndex)));
   const img = images[roundedIndex];
-  
+
   if (!img || !img.complete) return;
 
   // Clear canvas
@@ -112,7 +118,7 @@ function resizeCanvas() {
 // ==========================================================================
 function updateScrollProgress() {
   if (!canvas) return;
-  
+
   const scrollTrack = document.querySelector('.scroll-track');
   if (!scrollTrack) return;
 
@@ -126,12 +132,12 @@ function updateScrollProgress() {
 
 function tick() {
   if (!canvas) return;
-  
+
   const diff = smoothScroll.targetFrameIndex - smoothScroll.currentFrameIndex;
   if (Math.abs(diff) > 0.005) {
     smoothScroll.currentFrameIndex += diff * smoothScroll.ease;
     drawFrame(smoothScroll.currentFrameIndex);
-    
+
     // Smoothly update the logo rotation based on the lerped frame index
     const easedPercent = (smoothScroll.currentFrameIndex - 1) / (TOTAL_FRAMES - 1);
     document.documentElement.style.setProperty('--scroll-percent', easedPercent);
@@ -186,7 +192,7 @@ function initHeaderAndNav() {
   // Active navigation menu link highlight
   const currentPath = window.location.pathname;
   let filename = currentPath.substring(currentPath.lastIndexOf('/') + 1) || 'index.html';
-  
+
   // Strip query parameters
   if (filename.includes('?')) {
     filename = filename.substring(0, filename.indexOf('?'));
@@ -201,7 +207,7 @@ function initHeaderAndNav() {
     const href = link.getAttribute('href');
     const isAboutActive = (filename === 'about.html' || filename === 'legacy.html') && href === 'about.html';
     const isHomeActive = (filename === 'index.html' || filename === '') && href === 'index.html';
-    
+
     if (href === filename || isAboutActive || isHomeActive) {
       link.classList.add('active');
     } else {
@@ -273,14 +279,50 @@ function initHeaderAndNav() {
   }
 }
 
+// Helper: Load external scripts dynamically
+function loadScript(src) {
+  return new Promise((resolve, reject) => {
+    if (document.querySelector(`script[src="${src}"]`)) {
+      resolve();
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = src;
+    script.onload = resolve;
+    script.onerror = () => reject(new Error(`Failed to load script: ${src}`));
+    document.head.appendChild(script);
+  });
+}
+
+// Initialize Supabase Client
+async function initSupabase() {
+  if (SUPABASE_ANON_KEY === 'YOUR_SUPABASE_ANON_KEY' || !SUPABASE_ANON_KEY) {
+    console.warn('Supabase is not configured. Please set SUPABASE_ANON_KEY in app.js.');
+    return;
+  }
+
+  try {
+    await loadScript('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2');
+
+    if (window.supabase) {
+      supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      console.log('Supabase client initialized successfully.');
+    } else {
+      console.error('Supabase SDK loaded but window.supabase is undefined.');
+    }
+  } catch (error) {
+    console.error('Failed to initialize Supabase client:', error);
+  }
+}
+
 function initContactForm() {
   const form = document.getElementById('inquiry-form');
   const successMessage = document.getElementById('success-message');
-  
+
   if (form) {
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      
+
       const name = document.getElementById('full-name').value.trim();
       const company = document.getElementById('company-name').value.trim();
       const phone = document.getElementById('phone-number').value.trim();
@@ -302,27 +344,72 @@ function initContactForm() {
         return;
       }
 
-      // If all passed, show success message
-      if (successMessage) {
-        successMessage.style.display = 'block';
-        form.reset();
-        successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        
-        // Hide success message after 5 seconds
-        setTimeout(() => {
-          successMessage.style.display = 'none';
-        }, 8000);
+      // Show loading state on submit button
+      const submitBtn = form.querySelector('[type="submit"]');
+      const originalBtnText = submitBtn ? submitBtn.innerHTML : 'Send Inquiry';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'Sending... <span class="spinner"></span>';
+      }
+
+      try {
+        if (supabase) {
+          // Insert into Supabase 'inquiries' table
+          const { error } = await supabase
+            .from('inquiries')
+            .insert([
+              {
+                full_name: name,
+                company_name: company || null,
+                phone_number: phone,
+                email_address: email,
+                requirement_type: requirement,
+                detailed_message: message
+              }
+            ]);
+
+          if (error) throw error;
+        } else {
+          console.warn('Supabase client not initialized. Falling back to simulated submission.');
+        }
+
+        // Show success message
+        if (successMessage) {
+          successMessage.className = 'form-success-message';
+          successMessage.textContent = 'Thank you! Your inquiry has been submitted. Our sales team will contact you within 24 hours.';
+          successMessage.style.display = 'block';
+          form.reset();
+          successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+          // Hide success message after 8 seconds
+          setTimeout(() => {
+            successMessage.style.display = 'none';
+          }, 8000);
+        }
+      } catch (err) {
+        console.error('Error submitting inquiry to Supabase:', err);
+        if (successMessage) {
+          successMessage.className = 'form-success-message error-message';
+          successMessage.textContent = 'Error: Failed to submit inquiry. Please try again or contact us via WhatsApp.';
+          successMessage.style.display = 'block';
+          successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalBtnText;
+        }
       }
     });
   }
-  
+
   // Fill inquiry requirements from URL params (e.g., from products page quick inquiry)
   const urlParams = new URLSearchParams(window.location.search);
   const selectedProduct = urlParams.get('product');
   if (selectedProduct) {
     const requirementSelect = document.getElementById('requirement-type');
     const messageTextarea = document.getElementById('detailed-message');
-    
+
     if (requirementSelect) {
       // Map product to catalog category
       if (selectedProduct.includes('Mixer')) {
@@ -333,7 +420,7 @@ function initContactForm() {
         requirementSelect.value = 'Custom Fabrication';
       }
     }
-    
+
     if (messageTextarea) {
       messageTextarea.value = `I would like to receive a quick quote and technical details for the "${selectedProduct}".`;
     }
@@ -344,7 +431,7 @@ function initProductFilter() {
   const filterTabs = document.querySelectorAll('.filter-tab');
   const productCards = document.querySelectorAll('.product-card');
   const searchInput = document.getElementById('search-catalog');
-  
+
   if (filterTabs.length > 0 && productCards.length > 0) {
     let activeCategory = 'all';
     let activeSearch = '';
@@ -356,14 +443,14 @@ function initProductFilter() {
           card.style.display = 'flex';
           return;
         }
-        
+
         const category = card.getAttribute('data-category');
         const title = card.querySelector('.product-title')?.textContent.toLowerCase() || '';
         const desc = card.querySelector('.product-desc')?.textContent.toLowerCase() || '';
-        
+
         const matchesCategory = activeCategory === 'all' || category === activeCategory;
         const matchesSearch = title.includes(activeSearch) || desc.includes(activeSearch);
-        
+
         if (matchesCategory && matchesSearch) {
           card.style.display = 'flex';
         } else {
@@ -403,19 +490,175 @@ function initProductFilter() {
   }
 }
 
+function initProductGalleries() {
+  const galleries = document.querySelectorAll('.product-gallery-container');
+  const lightbox = document.getElementById('image-lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxCaption = document.getElementById('lightbox-caption');
+  const lightboxClose = lightbox ? lightbox.querySelector('.lightbox-close') : null;
+  const lightboxPrev = lightbox ? lightbox.querySelector('.lightbox-nav.prev') : null;
+  const lightboxNext = lightbox ? lightbox.querySelector('.lightbox-nav.next') : null;
+
+  if (galleries.length === 0) return;
+
+  // Global state for active lightbox gallery
+  let currentActiveGallery = null;
+  let currentImageIndex = 0;
+
+  galleries.forEach(gallery => {
+    const mainImg = gallery.querySelector('.gallery-main-img');
+    const card = gallery.closest('.product-card');
+    const thumbs = card ? card.querySelectorAll('.gallery-thumbnails .gallery-thumb') : [];
+    const zoomOverlay = gallery.querySelector('.zoom-overlay');
+
+    if (!mainImg || thumbs.length === 0) return;
+
+    // Build image list for this gallery
+    const images = Array.from(thumbs).map(thumb => ({
+      src: thumb.getAttribute('src'),
+      alt: thumb.getAttribute('alt')
+    }));
+
+    const setGalleryImage = (index) => {
+      if (index < 0 || index >= thumbs.length) return;
+
+      // Update thumbnail active states
+      thumbs.forEach(t => t.classList.remove('active'));
+      thumbs[index].classList.add('active');
+
+      // Update main image with a smooth fade effect
+      mainImg.style.opacity = '0';
+      setTimeout(() => {
+        mainImg.setAttribute('src', images[index].src);
+        mainImg.setAttribute('alt', images[index].alt);
+        mainImg.style.opacity = '1';
+      }, 150);
+    };
+
+    // Thumbnail clicks
+    thumbs.forEach((thumb, index) => {
+      thumb.addEventListener('click', (e) => {
+        e.preventDefault();
+        setGalleryImage(index);
+      });
+    });
+
+    // Open lightbox helper
+    const openLightbox = () => {
+      if (!lightbox || !lightboxImg) return;
+      
+      // Determine index based on currently active thumbnail
+      let activeIndex = 0;
+      thumbs.forEach((t, i) => {
+        if (t.classList.contains('active')) activeIndex = i;
+      });
+
+      // Save global state
+      currentActiveGallery = {
+        thumbs,
+        images,
+        setGalleryImage
+      };
+      currentImageIndex = activeIndex;
+
+      // Update lightbox layout
+      lightboxImg.setAttribute('src', images[activeIndex].src);
+      if (lightboxCaption) lightboxCaption.textContent = images[activeIndex].alt;
+
+      lightbox.classList.add('active');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    };
+
+    mainImg.addEventListener('click', openLightbox);
+    if (zoomOverlay) zoomOverlay.addEventListener('click', openLightbox);
+  });
+
+  // Lightbox Close
+  const closeLightbox = () => {
+    if (!lightbox) return;
+    lightbox.classList.remove('active');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    currentActiveGallery = null;
+  };
+
+  if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+  if (lightbox) {
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox || e.target.classList.contains('lightbox-content')) {
+        closeLightbox();
+      }
+    });
+  }
+
+  // Update lightbox slide view
+  const slideLightbox = (index) => {
+    if (!currentActiveGallery || !lightboxImg) return;
+
+    const gallery = currentActiveGallery;
+    if (index < 0) index = gallery.images.length - 1;
+    if (index >= gallery.images.length) index = 0;
+
+    currentImageIndex = index;
+
+    // Sync card image
+    gallery.setGalleryImage(index);
+
+    // Update lightbox elements
+    lightboxImg.style.transform = 'scale(0.95)';
+    setTimeout(() => {
+      lightboxImg.setAttribute('src', gallery.images[index].src);
+      if (lightboxCaption) lightboxCaption.textContent = gallery.images[index].alt;
+      lightboxImg.style.transform = 'scale(1)';
+    }, 100);
+  };
+
+  if (lightboxPrev) {
+    lightboxPrev.addEventListener('click', (e) => {
+      e.stopPropagation();
+      slideLightbox(currentImageIndex - 1);
+    });
+  }
+
+  if (lightboxNext) {
+    lightboxNext.addEventListener('click', (e) => {
+      e.stopPropagation();
+      slideLightbox(currentImageIndex + 1);
+    });
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox || !lightbox.classList.contains('active')) return;
+
+    if (e.key === 'Escape') {
+      closeLightbox();
+    } else if (e.key === 'ArrowLeft') {
+      lightboxPrev && lightboxPrev.click();
+    } else if (e.key === 'ArrowRight') {
+      lightboxNext && lightboxNext.click();
+    }
+  });
+}
+
 // ==========================================================================
 // 5. Initialize Application
 // ==========================================================================
 async function init() {
+  // Load and initialize Supabase
+  await initSupabase();
+
   // Setup General Header & Navbar Features
   initHeaderAndNav();
-  
+
   // Initialize scroll-based logo animation
   initScrollLogo();
-  
+
   // Setup Page-Specific Logic
   initContactForm();
   initProductFilter();
+  initProductGalleries();
 
   // Initialize Canvas Animation only if element is on current page
   if (canvas) {
@@ -434,7 +677,7 @@ async function init() {
 
     // 5. Setup scroll event listener
     window.addEventListener('scroll', updateScrollProgress);
-    
+
     // Trigger once immediately to set initial states
     updateScrollProgress();
 
