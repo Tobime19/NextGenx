@@ -514,10 +514,14 @@ function initProductGalleries() {
     if (!mainImg || thumbs.length === 0) return;
 
     // Build image list for this gallery
-    const images = Array.from(thumbs).map(thumb => ({
-      src: thumb.getAttribute('src'),
-      alt: thumb.getAttribute('alt')
-    }));
+    const images = Array.from(thumbs).map(thumb => {
+      const isVideo = thumb.tagName === 'VIDEO' || thumb.classList.contains('video-thumb') || thumb.hasAttribute('data-video');
+      return {
+        src: thumb.getAttribute('src') || thumb.getAttribute('data-video'),
+        alt: thumb.getAttribute('alt') || 'Product Video',
+        isVideo: isVideo
+      };
+    });
 
     const setGalleryImage = (index) => {
       if (index < 0 || index >= thumbs.length) return;
@@ -526,13 +530,41 @@ function initProductGalleries() {
       thumbs.forEach(t => t.classList.remove('active'));
       thumbs[index].classList.add('active');
 
-      // Update main image with a smooth fade effect
-      mainImg.style.opacity = '0';
-      setTimeout(() => {
-        mainImg.setAttribute('src', images[index].src);
-        mainImg.setAttribute('alt', images[index].alt);
-        mainImg.style.opacity = '1';
-      }, 150);
+      const item = images[index];
+      const mainVideo = gallery.querySelector('.gallery-main-video');
+
+      if (item.isVideo) {
+        // Hide image and zoom overlay
+        mainImg.style.display = 'none';
+        if (zoomOverlay) zoomOverlay.style.display = 'none';
+        
+        // Show and configure video
+        if (mainVideo) {
+          mainVideo.style.display = 'block';
+          if (mainVideo.getAttribute('src') !== item.src) {
+            mainVideo.setAttribute('src', item.src);
+            mainVideo.load();
+          }
+        }
+      } else {
+        // Hide video and pause it
+        if (mainVideo) {
+          mainVideo.style.display = 'none';
+          mainVideo.pause();
+        }
+        
+        // Show image and zoom overlay
+        mainImg.style.display = 'block';
+        if (zoomOverlay) zoomOverlay.style.display = 'flex';
+
+        // Update main image with a smooth fade effect
+        mainImg.style.opacity = '0';
+        setTimeout(() => {
+          mainImg.setAttribute('src', item.src);
+          mainImg.setAttribute('alt', item.alt);
+          mainImg.style.opacity = '1';
+        }, 150);
+      }
     };
 
     // Thumbnail clicks
@@ -562,8 +594,27 @@ function initProductGalleries() {
       currentImageIndex = activeIndex;
 
       // Update lightbox layout
-      lightboxImg.setAttribute('src', images[activeIndex].src);
-      if (lightboxCaption) lightboxCaption.textContent = images[activeIndex].alt;
+      const lightboxVideo = document.getElementById('lightbox-video');
+      const item = images[activeIndex];
+
+      if (item.isVideo) {
+        lightboxImg.style.display = 'none';
+        if (lightboxVideo) {
+          lightboxVideo.style.display = 'block';
+          lightboxVideo.setAttribute('src', item.src);
+          lightboxVideo.load();
+        }
+      } else {
+        const lightboxVideo = document.getElementById('lightbox-video');
+        if (lightboxVideo) {
+          lightboxVideo.style.display = 'none';
+          lightboxVideo.pause();
+        }
+        lightboxImg.style.display = 'block';
+        lightboxImg.setAttribute('src', item.src);
+      }
+
+      if (lightboxCaption) lightboxCaption.textContent = item.alt;
 
       lightbox.classList.add('active');
       lightbox.setAttribute('aria-hidden', 'false');
@@ -580,6 +631,12 @@ function initProductGalleries() {
     lightbox.classList.remove('active');
     lightbox.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+    
+    const lightboxVideo = document.getElementById('lightbox-video');
+    if (lightboxVideo) {
+      lightboxVideo.pause();
+    }
+    
     currentActiveGallery = null;
   };
 
@@ -605,12 +662,34 @@ function initProductGalleries() {
     // Sync card image
     gallery.setGalleryImage(index);
 
+    const lightboxVideo = document.getElementById('lightbox-video');
+    const item = gallery.images[index];
+
     // Update lightbox elements
     lightboxImg.style.transform = 'scale(0.95)';
+    if (lightboxVideo) lightboxVideo.style.transform = 'scale(0.95)';
+
     setTimeout(() => {
-      lightboxImg.setAttribute('src', gallery.images[index].src);
-      if (lightboxCaption) lightboxCaption.textContent = gallery.images[index].alt;
-      lightboxImg.style.transform = 'scale(1)';
+      if (item.isVideo) {
+        lightboxImg.style.display = 'none';
+        if (lightboxVideo) {
+          lightboxVideo.style.display = 'block';
+          if (lightboxVideo.getAttribute('src') !== item.src) {
+            lightboxVideo.setAttribute('src', item.src);
+            lightboxVideo.load();
+          }
+          lightboxVideo.style.transform = 'scale(1)';
+        }
+      } else {
+        if (lightboxVideo) {
+          lightboxVideo.style.display = 'none';
+          lightboxVideo.pause();
+        }
+        lightboxImg.style.display = 'block';
+        lightboxImg.setAttribute('src', item.src);
+        lightboxImg.style.transform = 'scale(1)';
+      }
+      if (lightboxCaption) lightboxCaption.textContent = item.alt;
     }, 100);
   };
 

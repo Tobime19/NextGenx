@@ -2258,6 +2258,45 @@ a {
   opacity: 1;
 }
 
+/* Video Thumbnail Styling */
+.gallery-thumb.video-thumb {
+  position: relative;
+  display: inline-block;
+  padding: 0;
+  overflow: hidden;
+}
+
+.gallery-thumb.video-thumb video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  display: block;
+}
+
+.play-icon-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.4);
+  color: #ffffff;
+  border-radius: inherit;
+  transition: background 0.2s ease;
+}
+
+.gallery-thumb.video-thumb:hover .play-icon-overlay {
+  background: rgba(15, 23, 42, 0.2);
+}
+
+.play-icon-overlay svg {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
 /* Zoom Overlay Icon */
 .zoom-overlay {
   position: absolute;
