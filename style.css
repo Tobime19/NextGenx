@@ -1378,7 +1378,8 @@ a {
 }
 
 .product-img-box {
-  height: 200px;
+  width: 100%;
+  aspect-ratio: 9 / 16;
   overflow: hidden;
   position: relative;
   background: var(--surface-dim);
