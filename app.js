@@ -577,6 +577,9 @@ function initProductGalleries() {
 
     // Open lightbox helper
     const openLightbox = () => {
+      // Disable zoom/lightbox on mobile viewports (width <= 768px)
+      if (window.innerWidth <= 768) return;
+
       if (!lightbox || !lightboxImg) return;
       
       // Determine index based on currently active thumbnail
